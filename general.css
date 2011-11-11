@@ -1,0 +1,25 @@
+
+v\:*{behavior:url(#default#VML);}
+body 
+  {
+    background-color:#ffffff; 
+  }
+
+#INKWELL
+  {
+    width: 16px;
+	height: 16px;
+	border: 1px black solid;
+  }
+  
+#BRUSH
+  {
+    width: 16px;
+	height: 16px;
+	border: 1px black solid;
+	padding: 1px;
+	font-family: Verdana;
+	font-size: 9px;
+	color: #000000;
+	cursor: 'hand';
+  }

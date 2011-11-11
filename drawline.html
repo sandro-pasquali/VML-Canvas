@@ -1,0 +1,117 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<title></title>
+<script language="JavaScript">
+
+var drawingOn = curX = curY = 0;
+var linePath = '';
+var currentPigment = '#000000';
+var currentBrushSize = 1;
+var lineRef = null;
+
+function makeLine()
+  {
+    var r = 'line' + Math.floor(Math.random()*9999999999999);
+    document.body.insertAdjacentHTML('BeforeEnd','<v:shape id="' + r + '" filled="false" strokecolor="" style="position:absolute;left:0;top:0;width:1;height:1" coordsize="1,1" coordorigin="0, 0"><v:path v=""/></v:shape>');
+    linePath = '';
+    lineRef = document.all[r];
+	colorRef = lineRef;
+	colorLine();
+	setBrush();
+    return;
+  }
+
+function clearLine()
+  {
+    lineRef.path = '';
+	linePath = '';
+	return;
+  }
+  
+function changePigment(p)
+  {
+    currentPigment = p || "#000000";
+	return;
+  }  
+  
+function colorLine()
+  {
+    colorRef.strokecolor = currentPigment;
+	return;
+  }
+  
+function changeBrush(b)
+  {
+    currentBrushSize = b || 1;
+    return;
+  }
+
+function setBrush()
+  {
+    lineRef.strokeweight = currentBrushSize; 
+	return;
+  }
+  
+function mouseUp()
+  {
+    drawingOn = false;
+	return;
+  } 
+
+function mouseDown()
+  {
+    var el = window.event.srcElement;
+    if(el.id == "INKWELL")
+	  {
+	  	changePigment(el.PIGMENT);
+	  }
+	else if(el.id == "BRUSH")
+	  {
+        changeBrush(el.BRUSHSIZE);
+	  }
+	else 
+	  {
+	    makeLine();
+        drawingOn = true;
+	  }
+	return;
+  }
+
+function mouseMove() 
+  {
+    if(drawingOn)
+	  {  
+	    curX = window.event.clientX;
+	    curY = window.event.clientY;
+        linePath += (linePath) ? curX +','+ curY+' ' : curX+', '+curY+' l ';
+	    lineRef.path = 'm ' + linePath + ' ';	
+	  }
+	return;
+  }
+  	
+document.onmousemove = mouseMove;
+document.onmousedown = mouseDown;
+document.onmouseup = mouseUp;
+
+</script>
+
+<link rel="stylesheet" href="general.css" type="text/css">
+
+</head>
+<body bgcolor="#333333" onselectstart="return false;" scroll=no>
+
+<SPAN ID="INKWELL" PIGMENT="#000000" STYLE="background-color:#000000;"></SPAN><SPAN ID="INKWELL" PIGMENT="#ff0000" STYLE="background-color:#ff0000;"></SPAN><SPAN ID="INKWELL" PIGMENT="#00ff00" STYLE="background-color:#00ff00;"></SPAN><SPAN ID="INKWELL" PIGMENT="#0000ff" STYLE="background-color:#0000ff;"></SPAN>
+<p>
+<DIV ID="BRUSH" BRUSHSIZE="1">1</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="2">2</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="3">3</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="4">4</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="5">5</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="6">6</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="7">7</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="8">8</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="9">9</DIV>
+<DIV ID="BRUSH" BRUSHSIZE="10">10</DIV>
+
+</body>
+</html>
